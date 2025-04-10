@@ -72,23 +72,6 @@ struct Value2StringFormatter
     }
 };
 
-template<>
-struct Value2StringFormatter<uint8_t>
-{
-    template<typename T>
-    static std::basic_string<uint8_t> format(const T& val)
-    {
-        std::basic_ostringstream<char> ss;
-        ss << val;
-        return reinterpret_cast<const uint8_t*>(ss.str().c_str());
-    }
-
-    static std::basic_string<uint8_t> format(const utf16string& val)
-    {
-        return format(utility::conversions::utf16_to_utf8(val));
-    }
-};
-
 static const char* _in_stream_msg = "stream not set up for input of data";
 static const char* _in_streambuf_msg = "stream buffer not set up for input of data";
 static const char* _out_stream_msg = "stream not set up for output of data";
